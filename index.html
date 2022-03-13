@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/index.css" />
+    <title>Paging and page replacement algorithms</title>
+  </head>
+
+  <body>
+    <main class="container" id="top">
+      <h1>Paging</h1>
+      <p>
+        Paging is a function of memory management where a computer will store
+        and retrieve data from a device's secondary storage (hard disk, SSD) to
+        the primary storage (RAM). Memory management is a crucial aspect of any
+        computing device, and paging specifically is important to the
+        implementation of virtual memory.
+      </p>
+      <p>
+        Virtual memory, what paging is used for often, is a memory management
+        technique where secondary memory can be used as if it were a part of the
+        main memory. Paging acts as an important part of virtual memory, as it
+        allows programs in secondary storage to exceed the available size of the
+        physical storage.
+      </p>
+      <h1>Page Replacement Algorithms in Operating Systems</h1>
+      <p>
+        In an operating system that uses paging for memory management, a page
+        replacement algorithm is needed to decide which page needs to be
+        replaced when new page comes in.
+      </p>
+      <p>
+        <span>Page Fault-</span>A page fault happens when a running program
+        accesses a memory page that is mapped into the virtual address space,
+        but not loaded in physical memory.
+      </p>
+
+      <p>
+        Since actual physical memory is much smaller than virtual memory, page
+        faults happen. In case of page fault, Operating System might have to
+        replace one of the existing pages with the newly needed page. Different
+        page replacement algorithms suggest different ways to decide which page
+        to replace. The target for all algorithms is to reduce the number of
+        page faults.
+      </p>
+      <h3>Page Replacement Algorithms:</h3>
+      <h4>1. First In First Out</h4>
+      <p>
+        This is the simplest page replacement algorithm. In this algorithm, the
+        operating system keeps track of all pages in the memory in a queue, the
+        oldest page is in the front of the queue. When a page needs to be
+        replaced page in the front of the queue is selected for removal.
+      </p>
+      <p>
+        <span>Example:</span>Consider page reference string 1, 3, 0, 3, 5, 6
+        with 3 page frames.Find number of page faults.
+      </p>
+      <p>
+        Initially all slots are empty, so when 1, 3, 0 came they are allocated
+        to the empty slots —><span> 3 Page Faults. </span><br />
+        when 3 comes, it is already in memory so —> 0 Page Faults. <br />
+        Then 5 comes, it is not available in memory so it replaces the oldest
+        page slot i.e 1. —>1 Page Fault. <br />
+        6 comes, it is also not available in memory so it replaces the oldest
+        page slot i.e 3 —>1 Page Fault. <br />
+        Finally when 3 come it is not available so it replaces 0 1 page fault
+      </p>
+      <h3>2. Least Recently Used</h3>
+      <p>
+        In this algorithm page will be replaced which is least recently used.
+      </p>
+      <p>
+        <span>Example:</span>Consider the page references 7, 0, 1, 2, 0, 3, 0,
+        4, 2, 3, 0, 3, 2, with 4 page frame. Find number of page fault.
+      </p>
+      <p>
+        Initially all slots are empty, so when 7 0 1 2 are allocated to the
+        empty slots —><span>4 Page faults</span><br />
+        0 is already there so —> <span>0 Page fault.</span><br />
+        when 3 came it will take the place of 7 because it is least recently
+        used —><span>1 Page fault</span><br />Now for the further page reference
+        string —> <span>0 Page fault</span><br />
+        because they are already available in the memory.
+      </p>
+    </main>
+  </body>
+</html>
