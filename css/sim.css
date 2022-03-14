@@ -92,3 +92,33 @@ li:hover {
   border-left: 1px solid #bbb;
   margin: 2rem 0;
 }
+
+.icon {
+  height: 100px;
+  width: 100px;
+}
+
+main {
+  flex: 1 1 auto;
+}
+
+.top {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem;
+}
+
+.queue {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: 1px solid #bbb;
+  border-bottom: 1px solid #bbb;
+  padding: 1rem;
+}
+
+.queue-list {
+  margin: 0 1rem;
+}
