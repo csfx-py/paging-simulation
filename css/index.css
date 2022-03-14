@@ -62,6 +62,12 @@ li {
   color: #060;
 }
 
+li:hover {
+  transform: scale(1.05);
+  transition: transform 0.2s ease-in-out;
+  transform-origin: left center;
+}
+
 .dash {
     border-left: 1px solid #bbb;
     margin: 2rem 0;
