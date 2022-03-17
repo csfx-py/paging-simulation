@@ -1,6 +1,6 @@
 # Page replacement algorithms
 
-**[DEMO](https://csfx-py.github.com/paging-simulation)**
+**[DEMO](https://csfx-py.github.io/paging-simulation)**
 
 ## Page replacement
 
