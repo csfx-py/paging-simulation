@@ -8,63 +8,53 @@
     <title>Page Replacement Simulation</title>
   </head>
   <body>
+    <div class="header">Paging and Page Replacement Algorithms</div>
     <div class="container">
       <nav>
         <ul>
           <li>
-            <input
-              type="radio"
-              name="pages-type"
-              id="pages-type-random"
-              value="random"
-            />
-            <label for="pages-type-random">Random Pages</label>
-            <br />
-            <input
-              type="radio"
-              name="pages-type"
-              id="pages-type-custom"
-              value="custom"
-            />
-            <label for="pages-type-custom">Custom Pages</label>
-            <br />
-          </li>
-          <li>
-            <input
-              type="text"
-              class="inp disabled"
-              id="custom-pages"
-              placeholder="Enter comma seperated pages"
-              disabled
-            />
-          </li>
-          <li>
-            <label for="count">Number of pages:</label
-            ><span id="count-value"></span><br />
+            <label for="proc-count">Number of Processes:</label><br />
             <input
               type="range"
-              name="count"
-              id="count"
+              name="proc-count"
+              id="proc-count"
               min="1"
-              max="32"
-              value="X"
+              max="10"
+              value="1"
+              oninput="this.nextElementSibling.value = this.value"
             />
+            <output>1</output>
           </li>
           <li>
-            <label for="ram">Number of Frames:</label><span id="ram"></span
-            ><br />
+            <label for="ram">Ram Size:</label><br />
             <input
               type="range"
               name="ram"
               id="ram"
               min="1"
-              max="16"
-              value="X"
+              max="7"
+              value="1"
             />
+            <span id="ram-size">2kb</span>
           </li>
           <li>
-            <label for="speed">Animation speed:</label><span id="speed"></span
-            ><br />
+            <label for="page-size">Page Size:</label><br />
+            <input
+              type="range"
+              name="page-size"
+              id="page-size"
+              min="1"
+              max="8"
+              value="1"
+              oninput="this.nextElementSibling.value = this.value + `kb`"
+            />
+            <output>1kb</output>
+          </li>
+          <li>
+            <span>Page Count: <span id="page-count">2</span></span>
+          </li>
+          <li>
+            <label for="speed">Animation speed:</label><br />
             <input
               type="range"
               name="speed"
@@ -73,7 +63,9 @@
               max="3"
               step="0.25"
               value="1"
+              oninput="this.nextElementSibling.value = this.value"
             />
+            <output>0.5</output>
           </li>
           <li>
             <label for="algorithm">Algorithm:</label><br />
@@ -94,71 +86,21 @@
           <h3>Page Reference</h3>
           <div class="queue">
             <hr />
-            <div class="queue-list complete">X</div>
-            <div class="queue-list active">X</div>
-            <div class="queue-list queued">X</div>
+            <div class="queue-list complete"></div>
+            <div class="queue-list active"></div>
+            <div class="queue-list queued"></div>
             <hr />
           </div>
         </div>
         <div class="bottom">
           <div class="primary-container">
             <img class="icon" src="./assets/ram.png" alt="" />
-            <div class="refs">
-              <div class="ref">X</div>
-              <div class="ref">X</div>
-              <div class="ref">X</div>
-              <div class="ref">X</div>
-              <div class="ref">X</div>
-              <div class="ref">X</div>
-              <div class="ref">X</div>
-              <div class="ref">X</div>
-              <div class="ref">X</div>
-              <div class="ref">X</div>
-              <div class="ref">X</div>
-              <div class="ref">X</div>
-              <div class="ref">X</div>
-              <div class="ref">X</div>
-              <div class="ref">X</div>
-              <div class="ref">X</div>
-              <div class="ref">X</div>
-              <div class="ref">X</div>
-              <div class="ref">X</div>
-              <div class="ref">X</div>
-              <div class="ref">X</div>
-              <div class="ref">X</div>
-              <div class="ref">X</div>
-              <div class="ref">X</div>
-            </div>
+            <div class="refs"></div>
             <ul></ul>
           </div>
           <div class="secondary-container">
             <img class="icon" src="./assets/hdd.jpg" alt="" />
-            <div class="refs">
-              <div class="ref">X</div>
-              <div class="ref">X</div>
-              <div class="ref">X</div>
-              <div class="ref">X</div>
-              <div class="ref">X</div>
-              <div class="ref">X</div>
-              <div class="ref">X</div>
-              <div class="ref">X</div>
-              <div class="ref">X</div>
-              <div class="ref">X</div>
-              <div class="ref">X</div>
-              <div class="ref">X</div>
-              <div class="ref">X</div>
-              <div class="ref">X</div>
-              <div class="ref">X</div>
-              <div class="ref">X</div>
-              <div class="ref">X</div>
-              <div class="ref">X</div>
-              <div class="ref">X</div>
-              <div class="ref">X</div>
-              <div class="ref">X</div>
-              <div class="ref">X</div>
-              <div class="ref">X</div>
-              <div class="ref">X</div>
-            </div>
+            <div class="refs"></div>
           </div>
         </div>
         <div class="results">
@@ -200,5 +142,6 @@
         </div>
       </main>
     </div>
+    <script src="./js/sim.js" defer></script>
   </body>
 </html>
