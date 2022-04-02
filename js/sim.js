@@ -16,6 +16,8 @@ const startBtn = document.getElementById("start");
 const stopBtn = document.getElementById("stop");
 let isStarted = false;
 
+const logger = document.getElementById("log");
+
 const twoN = [2, 4, 8, 16, 32];
 const pagesPerProc = 5;
 
@@ -99,10 +101,12 @@ async function fifo(ramSlots, procCount) {
       proc.classList.add("active");
       // request random page 0 to pagesPerProc for current process
       const page = Math.floor(Math.random() * pagesPerProc);
+      logger.innerHTML =
+        "Process <b>" + (j + 1) + "</b> requesting page <b>" + page + "</b>";
       // check page exists in ram
       if (ramRefs.querySelector("#page-" + (j + 1) + "-" + page)) {
-        // if page exists in ram
-        // highlight page
+        logger.innerHTML += ": Already in RAM";
+        // if page exists in ram, highlight page
         const pageRef = ramRefs.querySelector("#page-" + (j + 1) + "-" + page);
         pageRef.classList.add("active");
         // remove active after 500ms
@@ -119,15 +123,16 @@ async function fifo(ramSlots, procCount) {
           const page = document.getElementById(first.id);
           // remove page from ram
           page.classList.add("ref-scale-down");
-          await new Promise((resolve) => setTimeout(resolve, 1000));
+          await new Promise((resolve) => setTimeout(resolve, 500));
           ramRefs.removeChild(page);
           freeSlot.col = first.col;
           freeSlot.row = first.row;
+          logger.innerHTML += ": Page swapped with " + first.id;
         }
         // add row and col to firstIn
         firstIn.push({ id: ref.id, row: freeSlot.row, col: freeSlot.col });
         ramRefs.appendChild(ref);
-        await new Promise((resolve) => setTimeout(resolve, 1000));
+        await new Promise((resolve) => setTimeout(resolve, 500));
         ref.classList.add("ref-scale-up");
         // add page to ram freeslot
         ref.style.gridRow = freeSlot.row;
@@ -141,7 +146,7 @@ async function fifo(ramSlots, procCount) {
         }
         // wait for animSpeed
       }
-      await new Promise((resolve) => setTimeout(resolve, 3000));
+      await new Promise((resolve) => setTimeout(resolve, 2000));
       proc.classList.remove("active");
     }
   }
