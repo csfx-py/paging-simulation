@@ -61,14 +61,15 @@ startBtn.addEventListener("click", () => {
   }
 });
 
-stopBtn.addEventListener("click", () => {
+stopBtn.addEventListener("click", async () => {
   if (isStarted) {
-    isStarted = false;
-    startBtn.disabled = false;
     stopBtn.disabled = true;
-    startBtn.classList.remove("disabled");
     stopBtn.classList.add("disabled");
+    await new Promise((resolve) => setTimeout(resolve, 3000));
+    isStarted = false;
     stopAnim();
+    startBtn.disabled = false;
+    startBtn.classList.remove("disabled");
   }
 });
 
@@ -76,7 +77,7 @@ function createPage(proc = 0, page = 0) {
   const div = document.createElement("div");
   div.classList.add("ref");
   div.id = "page-" + (parseInt(proc) + 1) + "-" + page;
-  div.innerHTML = "Page-" + (parseInt(proc) + 1) + "-" + page;
+  div.innerHTML = "Proc-" + (parseInt(proc) + 1) + "-Page-" + page;
   div.style.borderColor = colors[proc];
   return div;
 }
@@ -179,5 +180,6 @@ const stopAnim = (e) => {
   queueDiv.innerHTML = "";
   const ramRefs = document.getElementById("ram-refs");
   ramRefs.innerHTML = "";
-  freeSlot = { row: 1, col: 1 };
+  freeSlot.row = 1;
+  freeSlot.col = 1;
 };
