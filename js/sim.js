@@ -74,6 +74,14 @@ stopBtn.addEventListener("click", () => {
   }
 });
 
+function createPage(proc = 0, page = 0) {
+  const div = document.createElement("div");
+  div.classList.add("ref");
+  div.id = "page-" + (parseInt(proc) + 1) + "-" + page;
+  div.innerHTML = "Page-" + (parseInt(proc) + 1) + "-" + page;
+  div.style.borderColor = colors[proc];
+  return div;
+}
 
 function fifo(){
   // TODO: implement FIFO algorithm
