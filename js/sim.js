@@ -1,3 +1,5 @@
+import { createPage } from "./createPage";
+
 // get elements from DOM
 const procCount = document.getElementById("proc-count");
 
@@ -71,3 +73,44 @@ stopBtn.addEventListener("click", () => {
     stopAnim();
   }
 });
+
+
+function fifo(){
+  // TODO: implement FIFO algorithm
+}
+
+const startAnim = (e) => {
+  const div = createPage(0, 0);
+  console.log(div);
+  // get queue div
+  const queueDiv = document.getElementById("queue");
+  // add procCount number of divs to queue div
+  for (let i = 0; i < procCount.value; i++) {
+    const div = document.createElement("div");
+    div.classList.add("queue-item");
+    div.id = "proc-" + i;
+    div.innerHTML = "Process " + (i + 1);
+    div.style.borderColor = colors[i];
+    queueDiv.appendChild(div);
+  }
+
+  // get ram-refs
+  const ramRefs = document.getElementById("ram-refs");
+
+  // grid rows for ramrefs set ram slots / 2
+  ramRefs.style.gridTemplateRows = "repeat(" + ramSlots / 2 + ", 1fr)";
+
+  // start fifo algorithm
+  if (algoVal === "fifo") {
+    fifo();
+  }
+};
+
+const stopAnim = (e) => {
+  // reset
+  const queueDiv = document.getElementById("queue");
+  queueDiv.innerHTML = "";
+  const ramRefs = document.getElementById("ram-refs");
+  ramRefs.innerHTML = "";
+  freeSlot = { row: 1, col: 1 };
+};
