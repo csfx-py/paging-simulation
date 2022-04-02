@@ -1,5 +1,3 @@
-import { createPage } from "./createPage";
-
 // get elements from DOM
 const procCount = document.getElementById("proc-count");
 
@@ -83,8 +81,69 @@ function createPage(proc = 0, page = 0) {
   return div;
 }
 
-function fifo(){
-  // TODO: implement FIFO algorithm
+async function fifo(ramSlots, procCount) {
+  const firstIn = [];
+
+  // get ram-refs
+  const ramRefs = document.getElementById("ram-refs");
+
+  // grid rows for ramrefs set ram slots / 2
+  ramRefs.style.gridTemplateRows = "repeat(" + ramSlots / 2 + ", 1fr)";
+
+  // loop processes 10 times
+  for (let i = 0; i < 10; i++) {
+    for (let j = 0; j < procCount; j++) {
+      // highlight process
+      const proc = document.getElementById("proc-" + j);
+      proc.classList.add("active");
+      // request random page 0 to pagesPerProc for current process
+      const page = Math.floor(Math.random() * pagesPerProc);
+      // check page exists in ram
+      if (ramRefs.querySelector("#page-" + (j + 1) + "-" + page)) {
+        // if page exists in ram
+        // highlight page
+        const pageRef = ramRefs.querySelector("#page-" + (j + 1) + "-" + page);
+        pageRef.classList.add("active");
+        // remove active after 500ms
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+        pageRef.classList.remove("active");
+      } else {
+        // create page
+        const ref = createPage(j, page);
+        // check ram full
+        if (ramRefs.childElementCount >= ramSlots) {
+          // get first element from firstIn
+          const first = firstIn.shift();
+          // remove page from ram
+          const page = document.getElementById(first.id);
+          // remove page from ram
+          page.classList.add("ref-scale-down");
+          await new Promise((resolve) => setTimeout(resolve, 1000));
+          ramRefs.removeChild(page);
+          freeSlot.col = first.col;
+          freeSlot.row = first.row;
+        }
+        // add row and col to firstIn
+        firstIn.push({ id: ref.id, row: freeSlot.row, col: freeSlot.col });
+        ramRefs.appendChild(ref);
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+        ref.classList.add("ref-scale-up");
+        // add page to ram freeslot
+        ref.style.gridRow = freeSlot.row;
+        ref.style.gridColumn = freeSlot.col;
+        if (freeSlot.col === maxCols && freeSlot.row < maxRows) {
+          // increment free slot
+          freeSlot.col = 1;
+          freeSlot.row++;
+        } else {
+          freeSlot.col++;
+        }
+        // wait for animSpeed
+      }
+      await new Promise((resolve) => setTimeout(resolve, 3000));
+      proc.classList.remove("active");
+    }
+  }
 }
 
 const startAnim = (e) => {
@@ -110,7 +169,7 @@ const startAnim = (e) => {
 
   // start fifo algorithm
   if (algoVal === "fifo") {
-    fifo();
+    fifo(ramSlots, parseInt(procCount.value));
   }
 };
 
