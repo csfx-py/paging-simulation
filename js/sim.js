@@ -20,6 +20,7 @@ const logger = document.getElementById("log");
 
 const twoN = [2, 4, 8, 16, 32];
 const pagesPerProc = 5;
+const iterationCount = 10;
 
 let ramSlots =
   twoN[parseInt(ramInput.value)] / twoN[parseInt(pageSizeInput.value)];
@@ -49,7 +50,7 @@ pageSizeInput.addEventListener("input", () => {
 });
 
 algo.addEventListener("change", () => {
-  algoVal = algo.value;
+  algoVal = algo.value.toLowerCase();
 });
 
 startBtn.addEventListener("click", () => {
@@ -59,6 +60,18 @@ startBtn.addEventListener("click", () => {
     stopBtn.disabled = false;
     startBtn.classList.add("disabled");
     stopBtn.classList.remove("disabled");
+
+    // disable all controls
+    procCount.disabled = true;
+    ramInput.disabled = true;
+    pageSizeInput.disabled = true;
+    algo.disabled = true;
+
+    // add disabled class to all controls
+    procCount.classList.add("disabled");
+    ramInput.classList.add("disabled");
+    pageSizeInput.classList.add("disabled");
+    algo.classList.add("disabled");
     startAnim();
   }
 });
@@ -72,10 +85,24 @@ stopBtn.addEventListener("click", async () => {
     stopAnim();
     startBtn.disabled = false;
     startBtn.classList.remove("disabled");
+
+    // enable all controls
+    procCount.disabled = false;
+    ramInput.disabled = false;
+    pageSizeInput.disabled = false;
+    algo.disabled = false;
+
+    // remove disabled class from all controls
+    procCount.classList.remove("disabled");
+    ramInput.classList.remove("disabled");
+    pageSizeInput.classList.remove("disabled");
+    algo.classList.remove("disabled");
+    // hide table
+    document.getElementById("stats").style.visibility = "hidden";
   }
 });
 
-const startAnim = (e) => {
+const startAnim = async (e) => {
   // get queue div
   const queueDiv = document.getElementById("queue");
   // add procCount number of divs to queue div
@@ -114,9 +141,15 @@ const startAnim = (e) => {
     }
   }
 
+  await new Promise((resolve) => setTimeout(resolve, 1000));
   // start fifo algorithm
   if (algoVal === "fifo") {
     fifo(ramSlots, parseInt(procCount.value));
+  }
+
+  // start lru algorithm
+  if (algoVal === "lru") {
+    lru(ramSlots, parseInt(procCount.value));
   }
 };
 
