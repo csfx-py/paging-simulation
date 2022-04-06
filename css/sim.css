@@ -157,6 +157,10 @@ main {
   color: #fff;
 }
 
+#log {
+  font-size: 1.4rem;
+}
+
 .bottom {
   width: 100%;
   padding: 1rem;
@@ -175,31 +179,18 @@ main {
   padding: 1rem;
 } 
 
-/* .refs {
-  display: flex;
-  justify-content: space-evenly;
-  width: 100%;
-  min-height: 100px;
-  margin: 1rem;
-  padding: 1rem;
-  flex-wrap: wrap;
-}
-
-.ref {
-  border: 2px solid;
-  margin: 1rem;
-  border-radius: 5px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 4px;
-}  */
-
-.refs {
+#ram-refs {
   display: grid;
   width: 100%;
   gap: 1rem;
   grid-template-columns: repeat(2, 1fr);
+  padding: 1rem;
+}
+
+#hdd {
+  display: grid;
+  width: 100%;
+  gap: 1rem;
   padding: 1rem;
 }
 
@@ -212,6 +203,7 @@ main {
   padding: 4px;
   height: 1.4rem;
   transform: scale(0);
+  font-size: 0.8rem;
 }
 
 .ref-scale-up {
@@ -234,6 +226,7 @@ table {
   border-spacing: 0;
   padding: 1rem;
   margin-bottom: 1rem;
+  visibility: hidden;
 }
 
 td,
