@@ -75,86 +75,7 @@ stopBtn.addEventListener("click", async () => {
   }
 });
 
-function createPage(proc = 0, page = 0) {
-  const div = document.createElement("div");
-  div.classList.add("ref");
-  div.id = "page-" + (parseInt(proc) + 1) + "-" + page;
-  div.innerHTML = "Proc-" + (parseInt(proc) + 1) + "-Page-" + page;
-  div.style.borderColor = colors[proc];
-  return div;
-}
-
-async function fifo(ramSlots, procCount) {
-  const firstIn = [];
-
-  // get ram-refs
-  const ramRefs = document.getElementById("ram-refs");
-
-  // grid rows for ramrefs set ram slots / 2
-  ramRefs.style.gridTemplateRows = "repeat(" + ramSlots / 2 + ", 1fr)";
-
-  // loop processes 10 times
-  for (let i = 0; i < 10; i++) {
-    for (let j = 0; j < procCount; j++) {
-      // highlight process
-      const proc = document.getElementById("proc-" + j);
-      proc.classList.add("active");
-      // request random page 0 to pagesPerProc for current process
-      const page = Math.floor(Math.random() * pagesPerProc);
-      logger.innerHTML =
-        "Process <b>" + (j + 1) + "</b> requesting page <b>" + page + "</b>";
-      // check page exists in ram
-      if (ramRefs.querySelector("#page-" + (j + 1) + "-" + page)) {
-        logger.innerHTML += ": Already in RAM";
-        // if page exists in ram, highlight page
-        const pageRef = ramRefs.querySelector("#page-" + (j + 1) + "-" + page);
-        pageRef.classList.add("active");
-        // remove active after 500ms
-        await new Promise((resolve) => setTimeout(resolve, 1000));
-        pageRef.classList.remove("active");
-      } else {
-        // create page
-        const ref = createPage(j, page);
-        // check ram full
-        if (ramRefs.childElementCount >= ramSlots) {
-          // get first element from firstIn
-          const first = firstIn.shift();
-          // remove page from ram
-          const page = document.getElementById(first.id);
-          // remove page from ram
-          page.classList.add("ref-scale-down");
-          await new Promise((resolve) => setTimeout(resolve, 500));
-          ramRefs.removeChild(page);
-          freeSlot.col = first.col;
-          freeSlot.row = first.row;
-          logger.innerHTML += ": Page swapped with " + first.id;
-        }
-        // add row and col to firstIn
-        firstIn.push({ id: ref.id, row: freeSlot.row, col: freeSlot.col });
-        ramRefs.appendChild(ref);
-        await new Promise((resolve) => setTimeout(resolve, 500));
-        ref.classList.add("ref-scale-up");
-        // add page to ram freeslot
-        ref.style.gridRow = freeSlot.row;
-        ref.style.gridColumn = freeSlot.col;
-        if (freeSlot.col === maxCols && freeSlot.row < maxRows) {
-          // increment free slot
-          freeSlot.col = 1;
-          freeSlot.row++;
-        } else {
-          freeSlot.col++;
-        }
-        // wait for animSpeed
-      }
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-      proc.classList.remove("active");
-    }
-  }
-}
-
 const startAnim = (e) => {
-  const div = createPage(0, 0);
-  console.log(div);
   // get queue div
   const queueDiv = document.getElementById("queue");
   // add procCount number of divs to queue div
@@ -173,6 +94,26 @@ const startAnim = (e) => {
   // grid rows for ramrefs set ram slots / 2
   ramRefs.style.gridTemplateRows = "repeat(" + ramSlots / 2 + ", 1fr)";
 
+  // get hdd
+  const hdd = document.getElementById("hdd");
+
+  // hdd grid rows = procCount
+  hdd.style.gridTemplateRows = "repeat(" + procCount.value + ", 1fr)";
+
+  // hdd grid cols = per proc pages
+  hdd.style.gridTemplateColumns = "repeat(" + pagesPerProc + ", 1fr)";
+
+  // add procCount * pagesPerProc pages to hdd
+  for (let i = 0; i < procCount.value; i++) {
+    for (let j = 0; j < pagesPerProc; j++) {
+      const ref = createPage(i, j, "hdd");
+      ref.style.gridRow = i + 1;
+      ref.style.gridColumn = j + 1;
+      hdd.appendChild(ref);
+      ref.classList.add("ref-scale-up");
+    }
+  }
+
   // start fifo algorithm
   if (algoVal === "fifo") {
     fifo(ramSlots, parseInt(procCount.value));
@@ -185,6 +126,10 @@ const stopAnim = (e) => {
   queueDiv.innerHTML = "";
   const ramRefs = document.getElementById("ram-refs");
   ramRefs.innerHTML = "";
+  const hdd = document.getElementById("hdd");
+  hdd.innerHTML = "";
+  const logs = document.getElementById("log");
+  logs.innerHTML = "";
   freeSlot.row = 1;
   freeSlot.col = 1;
 };
