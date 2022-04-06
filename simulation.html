@@ -69,7 +69,7 @@
         </ul>
         <button class="control-btn start" id="start">Start</button>
         <button class="control-btn stop disabled" id="stop" disabled>
-          Stop
+          Reset
         </button>
       </nav>
       <div class="dash"></div>
@@ -92,11 +92,15 @@
           </div>
         </div>
         <div class="results">
-          <table id="tab">
+          <table id="stats">
             <thead>
               <tr>
+                <th>Reference String</th>
+                <th colspan="4" id="refString"></th>
+              </tr>
+              <tr>
                 <th>Algorithm</th>
-                <th>Frame Size</th>
+                <th>Number of Frames</th>
                 <th>Pages</th>
                 <th>Hits</th>
                 <th>Miss</th>
@@ -105,17 +109,17 @@
             <tbody>
               <tr>
                 <td>FIFO</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td class="frame-size"></td>
+                <td class="pagePerProc"></td>
+                <td id="fifoHits"></td>
+                <td id="fifoMisses"></td>
               </tr>
               <tr>
                 <td>LRU</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td class="frame-size"></td>
+                <td class="pagePerProc"></td>
+                <td id="lruHits"></td>
+                <td id="lruMisses"></td>
               </tr>
             </tbody>
           </table>
@@ -123,7 +127,9 @@
       </main>
     </div>
     <script src="./js/createPage.js" defer></script>
+    <script src="./js/stats.js" defer></script>
     <script src="./js/fifo.js" defer></script>
+    <script src="./js/lru.js" defer></script>
     <script src="./js/sim.js" defer></script>
   </body>
 </html>
