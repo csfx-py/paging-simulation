@@ -1,5 +1,6 @@
 async function fifo(ramSlots, procCount) {
-  const firstIn = [];
+  const currentRam = [];
+  const refString = [];
 
   // get ram-refs
   const ramRefs = document.getElementById("ram-refs");
@@ -11,7 +12,7 @@ async function fifo(ramSlots, procCount) {
   ramRefs.style.gridTemplateRows = "repeat(" + ramSlots / 2 + ", 1fr)";
 
   // loop processes 10 times
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < iterationCount; i++) {
     for (let j = 0; j < procCount; j++) {
       // highlight process
       const proc = document.getElementById("proc-" + j);
@@ -20,6 +21,7 @@ async function fifo(ramSlots, procCount) {
       const page = Math.floor(Math.random() * pagesPerProc);
       logger.innerHTML =
         "Process <b>" + (j + 1) + "</b> requesting page <b>" + page + "</b>";
+      refString.push(`${j + 1}-${page}`);
 
       // check page exists in ram
       if (ramRefs.querySelector("#ram-" + (j + 1) + "-" + page)) {
@@ -28,16 +30,16 @@ async function fifo(ramSlots, procCount) {
         const pageRef = ramRefs.querySelector("#ram-" + (j + 1) + "-" + page);
         pageRef.classList.add("active");
         // remove active after 500ms
-        await new Promise((resolve) => setTimeout(resolve, 1000));
+        await new Promise((resolve) => setTimeout(resolve, 2000));
         pageRef.classList.remove("active");
       } else {
         // create page
         const ref = createPage(j, page, "ram");
         // check ram full
         if (ramRefs.childElementCount >= ramSlots) {
-          // get first element from firstIn
-          const first = firstIn.shift();
-          
+          // get first element from currentRam
+          const first = currentRam.shift();
+
           // remove page from ram
           const page = document.getElementById(first.id);
           const pageProcID = parseInt(page.id.split("-")[1]);
@@ -55,10 +57,11 @@ async function fifo(ramSlots, procCount) {
           hddPage.classList.add("ref-scale-up");
           freeSlot.col = first.col;
           freeSlot.row = first.row;
-          logger.innerHTML += `<span style="color:red">: Page swapped at </span><b>ram offset ${first.row}-${first.col}</b>`;
+          logger.innerHTML += `<span style="color:red">: Page swapped at 
+          </span><b>ram offset ${first.row}-${first.col}</b>`;
         }
-        // add row and col to firstIn
-        firstIn.push({ id: ref.id, row: freeSlot.row, col: freeSlot.col });
+        // add row and col to currentRam
+        currentRam.push({ id: ref.id, row: freeSlot.row, col: freeSlot.col });
         const hddPage = document.getElementById("hdd-" + (j + 1) + "-" + page);
         hddPage.classList.add("ref-scale-down");
         ramRefs.appendChild(ref);
@@ -81,4 +84,5 @@ async function fifo(ramSlots, procCount) {
       proc.classList.remove("active");
     }
   }
+  createStats(ramSlots, refString);
 }
