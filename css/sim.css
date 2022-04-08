@@ -164,7 +164,8 @@ main {
 .bottom {
   width: 100%;
   padding: 1rem;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
 }
 
 .primary-container,
@@ -172,10 +173,8 @@ main {
   display: flex;
   align-items: center;
   flex-direction: column;
-  width: 100%;
   min-height: 200px;
   border: 2px solid #bbb;
-  margin: 1rem;
   padding: 1rem;
 } 
 
@@ -200,10 +199,10 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 4px;
+  padding: 1rem;
   height: 1.4rem;
   transform: scale(0);
-  font-size: 0.8rem;
+  font-size: 1.1rem;
 }
 
 .ref-scale-up {

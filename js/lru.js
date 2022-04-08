@@ -42,7 +42,9 @@ async function lru(ramSlots, procCount) {
         });
 
         // remove active after 2000ms
-        await new Promise((resolve) => setTimeout(resolve, 2000));
+        await new Promise((resolve) =>
+          setTimeout(resolve, 2000 * (1 / animSpeed))
+        );
         pageRef.classList.remove("active");
       } else {
         // create page
@@ -65,7 +67,9 @@ async function lru(ramSlots, procCount) {
           hddPage.style.gridRow = pageProcID;
           hddPage.style.gridColumn = pagePageID + 1;
           hdd.appendChild(hddPage);
-          await new Promise((resolve) => setTimeout(resolve, 500));
+          await new Promise((resolve) =>
+            setTimeout(resolve, 500 * (1 / animSpeed))
+          );
           ramRefs.removeChild(page);
           hddPage.classList.add("ref-scale-up");
           freeSlot.col = first.col;
@@ -79,7 +83,9 @@ async function lru(ramSlots, procCount) {
         const hddPage = document.getElementById("hdd-" + (j + 1) + "-" + page);
         hddPage.classList.add("ref-scale-down");
         ramRefs.appendChild(ref);
-        await new Promise((resolve) => setTimeout(resolve, 500));
+        await new Promise((resolve) =>
+          setTimeout(resolve, 500 * (1 / animSpeed))
+        );
         hdd.removeChild(hddPage);
         ref.classList.add("ref-scale-up");
         // add page to ram freeslot
@@ -94,7 +100,9 @@ async function lru(ramSlots, procCount) {
         }
         // wait for animSpeed
       }
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+      await new Promise((resolve) =>
+        setTimeout(resolve, 2000 * (1 / animSpeed))
+      );
       proc.classList.remove("active");
     }
   }
