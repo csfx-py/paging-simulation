@@ -40,6 +40,9 @@ function createStats(ramSlots, refString) {
   // get lruMisses
   const lruMisses = document.getElementById("lruMisses");
   lruMisses.innerHTML = stats[1].misses;
+
+  // scroll to table
+  table.scrollIntoView({ behavior: "smooth" });
 }
 
 function fifoStats(ramSlots, refString) {
