@@ -12,6 +12,10 @@ const pageCount = document.getElementById("page-count");
 const algo = document.getElementById("algorithm");
 let algoVal = algo.value.toLowerCase();
 
+const animSpeedInput = document.getElementById("anim-speed");
+const animSpeedOut = document.getElementById("anim-out");
+let animSpeed = 1;
+
 const startBtn = document.getElementById("start");
 const stopBtn = document.getElementById("stop");
 let isStarted = false;
@@ -53,6 +57,11 @@ algo.addEventListener("change", () => {
   algoVal = algo.value.toLowerCase();
 });
 
+animSpeedInput.addEventListener("input", () => {
+  animSpeed = animSpeedInput.value;
+  animSpeedOut.innerHTML = animSpeed;
+});
+
 startBtn.addEventListener("click", () => {
   if (!isStarted) {
     isStarted = true;
@@ -80,6 +89,8 @@ stopBtn.addEventListener("click", async () => {
   if (isStarted) {
     stopBtn.disabled = true;
     stopBtn.classList.add("disabled");
+    // cursor loading
+    document.body.style.cursor = "progress";
     await new Promise((resolve) => setTimeout(resolve, 3000));
     isStarted = false;
     stopAnim();
@@ -99,6 +110,7 @@ stopBtn.addEventListener("click", async () => {
     algo.classList.remove("disabled");
     // hide table
     document.getElementById("stats").style.visibility = "hidden";
+    document.body.style.cursor = "default";
   }
 });
 
