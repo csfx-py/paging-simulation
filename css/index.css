@@ -41,7 +41,7 @@ body {
   height: 8vh;
   background: #333;
   color: #fff;
-  font: 2rem serif;
+  font: 2.5rem serif;
   text-align: center;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.8);
 }
@@ -95,6 +95,7 @@ main {
   background: rgba(255, 255, 255, 0.4);
   border-radius: 10px;
   padding: 2rem;
+  font-family: Comic Sans MS;
 }
 
 p {
@@ -104,3 +105,11 @@ p {
 span {
   font-weight: 700;
 }
+
+h1 {
+  color:#060 ;
+  font-family: 'Beau Rivage', cursive;
+}
+
+
+
