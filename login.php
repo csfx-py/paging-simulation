@@ -26,7 +26,7 @@ if (isset($_SESSION['srn']))      // if there is valid session
       <input type="text" name="srn" id="srn" placeholder="Enter SRN" class="inp" />
       <input type="password" name="password" id="password" placeholder="Enter password" class="inp" />
       <input type="submit" value="Login" class="btn" />
-      <a href="./register.html">Not registered?</a>
+      <a href="./register.php">Not registered?</a>
       <span id="response"></span>
     </form>
   </div>

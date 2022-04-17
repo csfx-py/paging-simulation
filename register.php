@@ -21,7 +21,7 @@ if (isset($_SESSION['srn']))      // if there is valid session
 <body>
   <div class="header">Paging and Page Replacement Algorithms</div>
   <div class="container">
-    <form action="./server/reg.php" method="POST" class="card" onsubmit="return validateReg()">
+    <form action="./server/register.php" method="POST" class="card" onsubmit="return validateReg()">
       <h1>Register</h1>
       <input type="text" name="username" id="username" placeholder="Enter Full Name" class="inp" />
       <input type="text" name="srn" id="srn" placeholder="Enter SRN" class="inp" />
@@ -34,7 +34,7 @@ if (isset($_SESSION['srn']))      // if there is valid session
 
       <input type="password" name="repassword" id="repassword" placeholder="Confirm password" class="inp" />
       <input type="submit" value="Register" class="btn" />
-      <a href="./login.html">Already registered?</a>
+      <a href="./login.php">Already registered?</a>
       <span id="response"></span>
     </form>
   </div>

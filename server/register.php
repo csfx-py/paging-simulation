@@ -35,7 +35,7 @@ if (isset($_POST)) {
   if (isExist($srn)) {
     echo "<script>";
     echo "alert('SRN already exists');";
-    echo "window.location.href = './register.html';";
+    echo "window.location.href = './register.php';";
     echo "</script>";
   } else {
     if (register($srn, $name, $course, $password)) {
@@ -44,7 +44,7 @@ if (isset($_POST)) {
     } else {
       echo "<script>";
       echo "alert('Registration failed');";
-      echo "window.location.href = './register.html';";
+      echo "window.location.href = './register.php';";
       echo "</script>";
     }
   }

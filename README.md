@@ -14,4 +14,4 @@ A page replacement algorithm is needed to decide which page needs to be replaced
 
 - Clone the repository
 - Install the dependencies
-- Run the index.html file via the browser
+- Run the index.html file in the browser
