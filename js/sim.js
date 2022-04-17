@@ -115,6 +115,8 @@ stopBtn.addEventListener("click", async () => {
 });
 
 const startAnim = async (e) => {
+  const bottomDiv = document.getElementById("bottom");
+  bottomDiv.scrollIntoView({ behavior: "smooth" });
   // get queue div
   const queueDiv = document.getElementById("queue");
   // add procCount number of divs to queue div
