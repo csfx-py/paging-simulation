@@ -1,10 +1,10 @@
 <?php
-  session_start();
-  session_regenerate_id();
-  if (!isset($_SESSION['srn']))      // if there is no valid session
-  {
-    header("Location: /login.php");
-  }
+session_start();
+session_regenerate_id();
+if (!isset($_SESSION['srn']))      // if there is no valid session
+{
+  header("Location: /login.php");
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -77,8 +77,8 @@
           <div class="refs" id="hdd"></div>
         </div>
       </div>
-      <div class="results">
-        <table id="stats">
+      <form action="./server/saveStats.php" method="POST" class="results" id="stats">
+        <table>
           <thead>
             <tr>
               <th>Reference String</th>
@@ -109,7 +109,18 @@
             </tr>
           </tbody>
         </table>
-      </div>
+        <input type="hidden" name="refStringIn" id="refStringIn">
+        <input type="hidden" name="procCountIn" id="procCountIn">
+        <input type="hidden" name="ramSizeIn" id="ramSizeIn">
+        <input type="hidden" name="pageSizeIn" id="pageSizeIn">
+        <input type="hidden" name="frameCount" id="frameCount">
+        <input type="hidden" name="pageCount" id="pageCount">
+        <input type="hidden" name="fifoHitsIn" id="fifoHitsIn">
+        <input type="hidden" name="fifoMissesIn" id="fifoMissesIn">
+        <input type="hidden" name="lruHitsIn" id="lruHitsIn">
+        <input type="hidden" name="lruMissesIn" id="lruMissesIn">
+        <input type="submit" value="Save" class="control-btn" id="ref-save" />
+      </form>
     </main>
   </div>
   <script src="./js/createPage.js" defer></script>

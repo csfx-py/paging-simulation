@@ -77,8 +77,6 @@ li {
   font-size: 1rem;
 }
 
-
-
 #algorithm {
   padding: 5px 1rem;
   width: 100%;
@@ -176,7 +174,7 @@ main {
   min-height: 200px;
   border: 2px solid #bbb;
   padding: 1rem;
-} 
+}
 
 #ram-refs {
   display: grid;
@@ -216,7 +214,10 @@ main {
 }
 
 .results {
-  padding: 2rem;
+  padding: 1rem;
+  visibility: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 table {
@@ -225,12 +226,21 @@ table {
   border-spacing: 0;
   padding: 1rem;
   margin-bottom: 1rem;
-  visibility: hidden;
 }
 
 td,
 th {
-  border: 1px solid #bbb;
+  border: 1px solid #060;
   padding: 1rem;
   text-align: center;
+}
+
+/* alternate tr bg */
+tr:nth-child(even) {
+  background-color: #aaa;
+}
+
+#ref-save {
+  align-self: flex-end;
+  margin-right: 0;
 }
