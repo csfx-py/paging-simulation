@@ -10,8 +10,29 @@ function createStats(ramSlots, refString) {
   // get first tr second th
   const refTh = document.getElementById("refString");
   // show refString
-  refTh.innerHTML = refString;
-  refTh.innerHTML = refTh.innerHTML.replace(/,/g, ", ");
+  refTh.innerHTML = refString.toString().replace(/,/g, ", ");
+
+  // get hidden inputs for post
+  const refIn = document.getElementById("refStringIn");
+  const procCountIn = document.getElementById("procCountIn");
+  const ramSizeIn = document.getElementById("ramSizeIn");
+  const pageSizeIn = document.getElementById("pageSizeIn");
+  const frameCountIn = document.getElementById("frameCount");
+  const pageCountIn = document.getElementById("pageCount");
+  const fifoHitsIn = document.getElementById("fifoHitsIn");
+  const fifoMissesIn = document.getElementById("fifoMissesIn");
+  const lruHitsIn = document.getElementById("lruHitsIn");
+  const lruMissesIn = document.getElementById("lruMissesIn");
+  refIn.value = refString.toString().replace(/,/g, ", ");
+  procCountIn.value = procCount.value;
+  ramSizeIn.value = twoN[parseInt(ramInput.value)];
+  pageSizeIn.value = twoN[parseInt(pageSizeInput.value)];
+  frameCountIn.value = ramSlots;
+  pageCountIn.value = pagesPerProc;
+  fifoHitsIn.value = stats[0].hits;
+  fifoMissesIn.value = stats[0].misses;
+  lruHitsIn.value = stats[1].hits;
+  lruMissesIn.value = stats[1].misses;
 
   // get by class frame-size
   const frameSize = document.getElementsByClassName("frame-size");
