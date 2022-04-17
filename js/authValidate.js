@@ -1,8 +1,8 @@
-const srn = document.getElementById("srn").value;
-const username = document.getElementById("username")?.value;
-const course = document.getElementById("course")?.value;
-const password = document.getElementById("password").value;
-const repassword = document.getElementById("repassword")?.value;
+const srn = document.getElementById("srn");
+const username = document.getElementById("username");
+const course = document.getElementById("course");
+const password = document.getElementById("password");
+const repassword = document.getElementById("repassword");
 
 function validateSrn(srn) {
   const srnRegex =
@@ -23,27 +23,27 @@ function validatePass(password) {
 }
 
 function validateReg() {
-  if (!validateSrn(srn)) {
+  if (!validateSrn(srn.value)) {
     alert("Invalid SRN");
     return false;
   }
 
-  if (username.length < 3) {
+  if (username.value.length < 3) {
     alert("Invalid username");
     return false;
   }
 
-  if (course.length < 3) {
+  if (course.value.length < 3) {
     alert("Invalid Course");
     return false;
   }
 
-  if (!validatePass(password)) {
+  if (!validatePass(password.value)) {
     alert("Invalid Password");
     return false;
   }
 
-  if (password !== repassword) {
+  if (password.value !== repassword.value) {
     alert("Passwords do not match");
     return false;
   }
@@ -52,12 +52,12 @@ function validateReg() {
 }
 
 function validateLogin() {
-  if (!validateSrn(srn)) {
+  if (!validateSrn(srn.value)) {
     alert("Invalid SRN");
     return false;
   }
 
-  if (!validatePass(password)) {
+  if (!validatePass(password.value)) {
     alert("Invalid Password");
     return false;
   }
