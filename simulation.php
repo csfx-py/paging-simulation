@@ -66,8 +66,7 @@ if (!isset($_SESSION['srn']))      // if there is no valid session
         <div id="queue"></div>
         <div id="log"></div>
       </div>
-      <!-- <button id="add">add</button> -->
-      <div class="bottom">
+      <div class="bottom" id="bottom">
         <div class="primary-container">
           <img class="icon" src="./assets/ram.png" alt="" />
           <div class="refs" id="ram-refs"></div>

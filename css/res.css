@@ -46,6 +46,11 @@ body {
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.8);
 }
 
+h1 {
+  margin: 1rem;
+  font-family: "Beau Rivage", cursive;
+}
+
 table {
   width: 100%;
   border-collapse: collapse;
@@ -62,12 +67,27 @@ table td:nth-child(2) {
 
 td,
 th {
-  border: 1px solid #060;
+  border: 2px solid #060;
   padding: 1rem;
   text-align: center;
+}
+
+/* head */
+th {
+  background-color: #060;
+  color: #fff;
+  border: 2px solid #333;
 }
 
 /* alternate tr bg */
 tr:nth-child(even) {
   background-color: #aaa;
+}
+
+tr:nth-child(odd) {
+  background-color: #a0ffa0;
+}
+
+tr:hover {
+  background-color: burlywood;
 }
